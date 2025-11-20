@@ -9,16 +9,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout código
+      - name: Checkout do código
         uses: actions/checkout@v3
 
-      - name: Instalar Python
+      - name: Configurar Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
       - name: Instalar dependências
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          pip install black flake8
 
-      - name: Rodar testes
-        run: pytest
+      - name: Rodar Black (checagem)
+        run: |
+          black --check .
+
+      - name: Rodar Flake8 (lint)
+        run: |
+          flake8 .
+
+      - name: Rodar Pytest
+        run: |
+          pytest
