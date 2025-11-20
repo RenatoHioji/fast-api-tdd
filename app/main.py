@@ -7,6 +7,7 @@ fake_db = {
     2: {"id": 2, "name": "Item 2"},
 }
 
+
 @app.get("/items/{item_id}")
 def get_item(item_id: int):
     item = fake_db.get(item_id)
